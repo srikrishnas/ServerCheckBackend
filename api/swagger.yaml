@@ -1,0 +1,75 @@
+swagger: "2.0"
+info:
+  title: SEVER CHECK API
+  description: checks available servers
+  version: 1.0.0
+basePath: /serverCheckService
+
+
+paths:
+  /serverCheck:
+    post:
+      tags:
+      - serverCheck
+      summary: "serverCheck"
+      description: "serverCheck"
+      operationId: serverCheckController
+
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "id"
+        required: true
+        schema:
+          $ref: "#/definitions/sampleData"     
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "serverCheckController"
+      
+definitions:
+  sampleData:
+    type: array
+    items:
+      type: object
+      properties:
+        urls:
+          type: "string"
+        priorities:
+          type: integer
+        
+
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      data:
+        type: object
+    example:
+      code: 0
+      data: { 'response': 'api_response_data' }
+
+  ErrorResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
