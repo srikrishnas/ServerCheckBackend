@@ -2,9 +2,19 @@ const serverCheckBuisness = require("../buisnessLogic/serverCheckBuisness.js");
 
 // Check servers from DB -> GET
 const serverCheckController = (req, res) => {
-  console.log(req.body);
+  const arrOfServers = [
+   {
+      "urls":"https://phoenixnap.com/kb/mysql-docker-container",
+      "priorities":1
+   },
+   {
+      "urls":"string",
+      "priorities":0
+   }
+];
+//   console.log(req.body);
   serverCheckBuisness
-    .getServerPriorityList(req.body)
+    .getServerPriorityList(arrOfServers)
     .then((result) => {
       console.log("Controller server list::::", JSON.stringify(result));
       res.json({ priority_url: result });
